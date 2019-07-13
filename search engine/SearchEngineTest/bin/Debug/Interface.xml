@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Interface</name>
+    </assembly>
+    <members>
+        <member name="T:Interface.FileIndexer">
+            <summary>
+            Gets the files in the repository
+            </summary>
+        </member>
+        <member name="F:Interface.FileIndexer._corpus">
+            <summary>
+            a Hashset containing all the files in the repository
+            </summary>
+        </member>
+        <member name="F:Interface.FileIndexer._commonIndex">
+            <summary>
+            contains all keywords in the corpus
+            </summary>
+        </member>
+        <member name="F:Interface.FileIndexer._Index">
+            <summary>
+            contains all the files in the corpus with all texts appended
+            </summary>
+        </member>
+        <member name="M:Interface.FileIndexer.fileIndexer(System.String)">
+            <summary>
+            Gets all pdf, doc, docx, ppt, pptx, xls, xlsx, txt, html and xml files and adds them to a repository
+            It creates a list of all the files in the repository
+            </summary>
+            <param name="directory">a string parameter</param>
+        </member>
+        <member name="M:Interface.FileIndexer.buildIndex(System.String)">
+            <summary>
+            builds a foward index of all files and appends all its text
+            </summary>
+            <param name="path">a string parameter</param>
+        </member>
+        <member name="M:Interface.FileIndexer.extractText(System.IO.FileInfo)">
+            <summary>
+            extracts the texts from the document passed
+            </summary>
+            <param name="document">a Fileinfo parameter</param>
+            <returns>a list of all the words or terms contained in the parameter</returns>
+        </member>
+        <member name="M:Interface.FileIndexer.containsTerm(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            checkes if a list contains a term
+            </summary>
+            <param name="term">a string parameter</param>
+            <param name="allTexts">a list of type string parameter</param>
+            <returns>a boolean value</returns>
+        </member>
+        <member name="M:Interface.FileIndexer.docsContainingTerm(System.String)">
+            <summary>
+            counts the number of files in the corpus containing a term 
+            </summary>
+            <param name="term">a string parameter</param>
+            <returns>an integer value</returns>
+        </member>
+        <member name="M:Interface.FileIndexer.termFrequency(System.String,System.IO.FileInfo)">
+            <summary>
+            calculates the frequency of a term in a doc
+            </summary>
+            <param name="term">a string parameter</param>
+            <param name="doc">a Fileinfo parameter</param>
+            <returns>an integer value</returns>
+        </member>
+        <member name="M:Interface.FileIndexer.termFrequency(System.String,System.String[])">
+            <summary>
+            calculate the frequency of a term in a doc
+            </summary>
+            <param name="term">a string parameter</param>
+            <param name="tokens">a string array parameter</param>
+            <returns>an integer value</returns>
+        </member>
+        <member name="M:Interface.Form1.#ctor">
+            <summary>
+            This contains the Graphical User Interface for the search engine
+            </summary>
+        </member>
+        <member name="F:Interface.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Interface.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Interface.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Interface.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:Interface.QueryParser">
+            <summary>
+            Generates a representation of the user's input
+            Removes preposition and punctuations
+            </summary>
+        </member>
+        <member name="M:Interface.QueryParser.parseQuery(System.String)">
+            <summary>
+            The sentimentAnalysis method
+            extracts the sentiment/keywords in the users search parameters
+            </summary>
+            <param name="userQuery">a string parameter</param>
+            <returns>a string array colletion</returns>
+        </member>
+        <member name="T:Interface.Ranker">
+            <summary>
+            Gets and Rank the files matching the user's query representation
+            </summary>
+        </member>
+        <member name="F:Interface.Ranker._queryRank">
+            <summary>
+            contains all the matching keywords in the query mapped to their IDF
+            </summary>
+        </member>
+        <member name="F:Interface.Ranker._invertedIndex">
+            <summary>
+            contains the Inverted index of the all files mapped their TFIDF
+            </summary>
+        </member>
+        <member name="F:Interface.Ranker._termIDF">
+            <summary>
+            contains the inverted document frequency for every notable terms in the corpus
+            </summary>
+        </member>
+        <member name="F:Interface.Ranker._newRankList">
+            <summary>
+            contains all files and their cosine similarities to the query appended 
+            </summary>
+        </member>
+        <member name="M:Interface.Ranker.Rank(System.String[])">
+            <summary>
+            Accesses the Inverted Index for files matching the user query and sorts them by relevance
+            </summary>
+            <param name="query">a string array parameter</param>
+        </member>
+        <member name="M:Interface.Ranker.getInvertedIndex(System.String)">
+            <summary>
+            gets the Inverted index of every file in the corpus and their normalized weight
+            </summary>
+        </member>
+        <member name="M:Interface.Ranker.compute_IDf">
+            <summary>
+            calculates the Inverted Documnent Frequency for every term in the common index
+            </summary>
+        </member>
+        <member name="M:Interface.Ranker.getTermWeights(System.IO.FileInfo)">
+            <summary>
+            calculates the vectors of all the terms in a document
+            </summary>
+            <param name="doc">a Fileinfo parameter</param>
+            <returns>a dictionary </returns>
+        </member>
+        <member name="M:Interface.Ranker.getTermWeights(System.String[])">
+            <summary>
+            calculates the vectors of all the terms in an array
+            </summary>
+            <param name="tokens">a string array parameter</param>
+            <returns>a dictionary </returns>
+        </member>
+        <member name="M:Interface.Ranker.normalizedWeights(System.IO.FileInfo)">
+            <summary>
+            calculates the normalized vectors of the TF*IDF vectors
+            </summary>
+            <param name="doc">a Fileinfo parameter</param>
+            <returns>a dictionary</returns>
+        </member>
+        <member name="M:Interface.Ranker.cosineSimilarity(System.Collections.Generic.Dictionary{System.String,System.Double},System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            calculates the Cosine Similarity of two vectors
+            </summary>
+            <param name="query">a type <c>Dictionary(string ,double)</c> parameter</param>
+            <param name="doc">a type <c>Dictionary(string, double)</c> parameter</param>
+            <returns>a type double value</returns>
+        </member>
+        <member name="T:Interface.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Interface.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Interface.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>
